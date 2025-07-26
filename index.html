@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Movie App</title>
+  </head>
+  <body>
+    <header>
+      <h1 id="site-title" style="margin:0 2rem 0 0;font-size:2.1rem;font-weight:800;letter-spacing:2px;color:#ffd200;white-space:nowrap;">MOVIES BROWSER</h1>
+      <form id="form">
+        <input type="text" id="search" class="search" placeholder="Search">
+        <div id="search-suggestions" class="search-suggestions"></div>
+      </form>
+      <button id="favorites-btn" title="View Favorites" style="background:none;border:none;cursor:pointer;margin-left:1.2rem;font-size:2rem;color:#f953c6;vertical-align:middle;">
+        <span id="favorites-count" style="font-size:1.1rem;vertical-align:top;margin-right:0.2rem;">0</span>❤️
+      </button>
+      <button id="watchlist-btn" title="View Watchlist" style="background:none;border:none;cursor:pointer;margin-left:1.2rem;font-size:2rem;color:#ffd200;vertical-align:middle;">
+        <span id="watchlist-count" style="font-size:1.1rem;vertical-align:top;margin-right:0.2rem;">0</span>🔖
+      </button>
+      <button id="theme-toggle-btn" title="Toggle Dark/Light Mode" style="background:none;border:none;cursor:pointer;margin-left:1.2rem;font-size:2rem;color:#ffd200;vertical-align:middle;">
+        <span id="theme-toggle-icon">🌙</span>
+      </button>
+      <a id="login-btn" href="login.html" style="margin-left:1.2rem;font-size:1.1rem;font-weight:600;color:#ffd200;background:rgba(34,37,75,0.85);border-radius:1.2rem;padding:0.5rem 1.2rem;text-decoration:none;transition:background 0.2s, color 0.2s;">Login</a>
+      <a id="register-btn" href="register.html" style="margin-left:0.7rem;font-size:1.1rem;font-weight:600;color:#232526;background:linear-gradient(90deg,#ffd200,#f953c6);border-radius:1.2rem;padding:0.5rem 1.2rem;text-decoration:none;transition:background 0.2s, color 0.2s;">Register</a>
+    </header>
+
+    <div id="filter-bar" style="margin:0 auto 1.5rem auto;max-width:1200px;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:center;">
+      <label for="sort-select">Sort by:</label>
+      <select id="sort-select">
+        <option value="popularity.desc">Popularity ↓</option>
+        <option value="popularity.asc">Popularity ↑</option>
+        <option value="vote_average.desc">Rating ↓</option>
+        <option value="vote_average.asc">Rating ↑</option>
+        <option value="release_date.desc">Release Date ↓</option>
+        <option value="release_date.asc">Release Date ↑</option>
+      </select>
+      <label for="lang-select">Language:</label>
+      <select id="lang-select">
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="es">Spanish</option>
+        <option value="de">German</option>
+        <option value="ja">Japanese</option>
+        <option value="ko">Korean</option>
+        <option value="zh">Chinese</option>
+        <option value="hi">Hindi</option>
+        <option value="it">Italian</option>
+        <option value="ru">Russian</option>
+        <option value="pt">Portuguese</option>
+        <option value="ar">Arabic</option>
+      </select>
+      <label for="genre-select">Genre:</label>
+      <select id="genre-select" multiple style="min-width:120px;"></select>
+      <label for="year-input">Year:</label>
+      <input id="year-input" type="number" min="1900" max="2100" placeholder="Year" style="width:80px;">
+      <label for="min-rating-select">Min Rating:</label>
+      <select id="min-rating-select">
+        <option value="0">Any</option>
+        <option value="5">5+</option>
+        <option value="6">6+</option>
+        <option value="7">7+</option>
+        <option value="8">8+</option>
+        <option value="9">9+</option>
+      </select>
+    </div>
+
+    <main id="main"></main>
+    <div id="pagination" class="pagination"></div>
+
+    <div id="movie-modal" style="display:none;">
+      <div id="modal-content">
+        <span id="modal-close">&times;</span>
+        <img id="modal-poster" src="" alt="" style="display:none;" />
+        <div id="modal-body"></div>
+      </div>
+    </div>
+    <div id="actor-modal" style="display:none;">
+      <div id="actor-modal-content">
+        <span id="actor-modal-close">&times;</span>
+        <div id="actor-modal-body"></div>
+      </div>
+    </div>
+
+    <button id="filter-toggle-btn" style="display:none;position:fixed;left:1.2rem;top:5.2rem;z-index:30;background:#ffd200;color:#232526;border:none;border-radius:1.2rem;padding:0.5rem 1.2rem;font-size:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,0.10);">Filters</button>
+    <button id="scroll-top-btn" title="Scroll to top" style="display:none;">↑</button>
+
+    <script src="script.js"></script>
+  </body>
+</html>

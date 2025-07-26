@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - MOVIES BROWSER</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Poppins', sans-serif;
+    }
+    .auth-container {
+      background: rgba(34,37,75,0.75);
+      backdrop-filter: blur(12px) saturate(1.2);
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+      padding: 2.5rem 2.2rem 2.2rem 2.2rem;
+      max-width: 350px;
+      width: 95vw;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .auth-title {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: #ffd200;
+      margin-bottom: 1.2rem;
+      text-align: center;
+    }
+    .auth-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    .auth-form input {
+      background: #232526;
+      color: #fff;
+      border: none;
+      border-radius: 0.8rem;
+      padding: 0.8rem 1.1rem;
+      font-size: 1.08rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      transition: box-shadow 0.2s, background 0.2s;
+    }
+    .auth-form input:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px #ffd20055;
+      background: #373b69;
+    }
+    .auth-btn {
+      background: linear-gradient(90deg,#ffd200,#f953c6);
+      color: #232526;
+      border: none;
+      border-radius: 1.2rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      transition: background 0.2s, color 0.2s;
+    }
+    .auth-btn:hover {
+      background: linear-gradient(90deg,#3a7bd5,#ffd200);
+      color: #fff;
+    }
+    .auth-link {
+      color: #ffd200;
+      text-decoration: underline;
+      margin-top: 1.2rem;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: color 0.2s;
+      text-align: center;
+      display: block;
+    }
+    .auth-link:hover { color: #f953c6; }
+    .auth-error {
+      color: #f953c6;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      text-align: center;
+      min-height: 1.2em;
+    }
+    @media (max-width: 500px) {
+      .auth-container { padding: 1.2rem 0.7rem; }
+      .auth-title { font-size: 1.3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-title">MOVIES BROWSER</div>
+    <form class="auth-form" id="register-form" autocomplete="on">
+      <div class="auth-error" id="register-error"></div>
+      <input type="text" id="register-username" placeholder="Username" required autocomplete="username" />
+      <input type="email" id="register-email" placeholder="Email" required autocomplete="email" />
+      <input type="password" id="register-password" placeholder="Password" required autocomplete="new-password" minlength="5" />
+      <input type="password" id="register-password2" placeholder="Confirm Password" required autocomplete="new-password" minlength="5" />
+      <button class="auth-btn" type="submit">Register</button>
+    </form>
+    <a class="auth-link" href="login.html">Already have an account? Login</a>
+  </div>
+  <script>
+    // Demo register logic using localStorage
+    const form = document.getElementById('register-form');
+    const errorDiv = document.getElementById('register-error');
+    form.onsubmit = function(e) {
+      e.preventDefault();
+      const username = document.getElementById('register-username').value.trim();
+      const email = document.getElementById('register-email').value.trim();
+      const password = document.getElementById('register-password').value;
+      const password2 = document.getElementById('register-password2').value;
+      if (password !== password2) {
+        errorDiv.textContent = 'Passwords do not match.';
+        return;
+      }
+      if (password.length < 5) {
+        errorDiv.textContent = 'Password must be at least 5 characters.';
+        return;
+      }
+      let users = JSON.parse(localStorage.getItem('mb_users') || '[]');
+      if (users.find(u => u.username === username)) {
+        errorDiv.textContent = 'Username already exists.';
+        return;
+      }
+      if (users.find(u => u.email === email)) {
+        errorDiv.textContent = 'Email already registered.';
+        return;
+      }
+      const user = { username, email, password };
+      users.push(user);
+      localStorage.setItem('mb_users', JSON.stringify(users));
+      localStorage.setItem('mb_loggedin', JSON.stringify(user));
+      window.location.href = 'index.html';
+    };
+  </script>
+</body>
+</html> 
