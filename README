@@ -1,7 +1,0 @@
-fetch moives by using
-
- async function fetchMovies() {
-  const response = await fetch(`${API_URL}?api_key=${API_KEY}`);
-  const data = await response.json();
-  displayMovies(data.results);
-}
